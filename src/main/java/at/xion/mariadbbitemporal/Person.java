@@ -1,5 +1,6 @@
 package at.xion.mariadbbitemporal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -33,6 +34,9 @@ public class Person {
 		this.name = name;
 	}
 
+	// GENERATED ALWAYS AS ROW START/END columns are maintained by MariaDB; writing
+	// explicit values back (as Hibernate does on UPDATE) fails with error 1906.
+	@Column(insertable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getStartTimestamp() {
 		return startTimestamp;
@@ -42,6 +46,7 @@ public class Person {
 		this.startTimestamp = fromTimestamp;
 	}
 
+	@Column(insertable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getEndTimestamp() {
 		return endTimestamp;
